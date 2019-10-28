@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace Pagination
 {
@@ -15,6 +16,23 @@ namespace Pagination
         public Form1()
         {
             InitializeComponent();
+        }
+
+        DB db = new DB();
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string Query = "SELECT * FROM `info`";
+            DataSet ds = db.GetDataSet(Query);
+            //dataGridView1.DataSource = db.GetDataSet(Query).Tables[0];
+            dataGridView1.DataSource = ds.Tables[0];
+            dataGridView1.ClearSelection();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            string Query = "select * from info where xxx = 'q'";
+            label1.Text = db.GetRows(Query).ToString();
         }
     }
 }

@@ -1,0 +1,8 @@
+2019年10月28日
+1.MySQL建用户、建库
+create user 'qk'@'%' identified by '11111';
+flush privileges;
+CREATE DATABASE `pagination` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+grant all privileges on `pagination`.* to 'qk'@'%' identified by '11111' with grant option;
+flush privileges;
+2.DB.cs写了四个sql方法
