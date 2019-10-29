@@ -18,6 +18,12 @@ namespace Pagination
             return conn;
         }
 
+        //Mysqlcom
+        //CommInt
+        //MysqlComm
+        //MysqlDs
+        //没有Comm
+
         /// <summary>
         /// 传入SQL，返回查询结果记录条数
         /// </summary>

@@ -34,5 +34,11 @@ namespace Pagination
             string Query = "select * from info where xxx = 'q'";
             label1.Text = db.GetRows(Query).ToString();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            paginator1.NowPage = 666;
+            //MessageBox.Show(paginator1.NowPage.ToString());
+        }
     }
 }
