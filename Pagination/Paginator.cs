@@ -20,7 +20,7 @@ namespace Pagination
         //每页条数下拉框 cmbox_RecordsPerPage
         private int txt_NowPage;
 
-        public int NowPage { get => txt_NowPage; set => txt_NowPage = value; }
+        paginator_setting ps = new paginator_setting();
 
         //共77777条 lab_TotalRecords
         //每页条数下拉框 cmbox_RecordsPerPage
@@ -35,10 +35,10 @@ namespace Pagination
 
         private void Paginator_Load(object sender, EventArgs e)
         {
-            MessageBox.Show(NowPage.ToString());
+            //MessageBox.Show(ps.NowPage.ToString());
             txtbox_NowPage.TextAlign = HorizontalAlignment.Center;
             cmbox_RecordsPerPage.SelectedIndex = 0;
-            txtbox_NowPage.Text = NowPage.ToString();
+            txtbox_NowPage.Text = ps.NowPage.ToString();
         }
     }
 }
