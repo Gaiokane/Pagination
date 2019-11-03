@@ -178,6 +178,7 @@
             this.cmbox_RecordsPerPage.Name = "cmbox_RecordsPerPage";
             this.cmbox_RecordsPerPage.Size = new System.Drawing.Size(77, 20);
             this.cmbox_RecordsPerPage.TabIndex = 11;
+            this.cmbox_RecordsPerPage.SelectedIndexChanged += new System.EventHandler(this.cmbox_RecordsPerPage_SelectedIndexChanged);
             // 
             // lab_TotalRecords
             // 
