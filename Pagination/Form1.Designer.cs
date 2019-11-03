@@ -31,7 +31,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.paginator1 = new Pagination.Paginator();
             this.lab_TotalPages = new System.Windows.Forms.Label();
             this.linklab_LastPage = new System.Windows.Forms.LinkLabel();
             this.linklab_NextPage = new System.Windows.Forms.LinkLabel();
@@ -43,6 +42,7 @@
             this.cmbox_RecordsPerPage = new System.Windows.Forms.ComboBox();
             this.lab_TotalRecords = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.paginator1 = new Pagination.Paginator();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -75,13 +75,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "label1";
             this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // paginator1
-            // 
-            this.paginator1.Location = new System.Drawing.Point(388, 12);
-            this.paginator1.Name = "paginator1";
-            this.paginator1.Size = new System.Drawing.Size(400, 27);
-            this.paginator1.TabIndex = 3;
             // 
             // lab_TotalPages
             // 
@@ -133,6 +126,7 @@
             this.txtbox_NowPage.Size = new System.Drawing.Size(37, 21);
             this.txtbox_NowPage.TabIndex = 15;
             this.txtbox_NowPage.Text = "1";
+            this.txtbox_NowPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbox_NowPage_KeyPress);
             // 
             // lab_Di
             // 
@@ -212,6 +206,13 @@
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            // 
+            // paginator1
+            // 
+            this.paginator1.Location = new System.Drawing.Point(388, 12);
+            this.paginator1.Name = "paginator1";
+            this.paginator1.Size = new System.Drawing.Size(400, 27);
+            this.paginator1.TabIndex = 3;
             // 
             // Form1
             // 

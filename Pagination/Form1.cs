@@ -22,6 +22,9 @@ namespace Pagination
         DB db = new DB();
         paginator_setting ps = new paginator_setting();
 
+        int TotalCount;
+        int PerPage;
+
         //原始SQL
         static string SourceSQL = "SELECT id,xxx FROM info";
 
@@ -30,7 +33,18 @@ namespace Pagination
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int PerPage = GetCmboxRecordsPerPage(cmbox_RecordsPerPage.SelectedIndex);
+            //显示共多少条数据
+            TotalCount = Convert.ToInt32(db.GetResult(CountSQL));
+            lab_TotalRecords.Text = "共" + TotalCount + "条";
+
+            //获取下拉框每页显示条数
+            PerPage = GetCmboxRecordsPerPage(cmbox_RecordsPerPage.SelectedIndex);
+
+            //默认第一页
+            txtbox_NowPage.Text = "1";
+
+            //根据总条数、每页显示条数，显示共多少页
+            lab_TotalPages.Text = "共" + GetTotalPages(TotalCount, PerPage) + "页";
 
             //        1       2        3
             //1       0,1     1,1      2,1
@@ -76,6 +90,8 @@ namespace Pagination
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+
             //分页_当前页文本框文字居中
             txtbox_NowPage.TextAlign = HorizontalAlignment.Center;
 
@@ -86,7 +102,8 @@ namespace Pagination
             //txtbox_NowPage.Text = 666.ToString();
 
             //显示共多少条数据
-            lab_TotalRecords.Text = "共" + db.GetResult(CountSQL) + "条";
+            //lab_TotalRecords.Text = "共" + db.GetResult(CountSQL) + "条";
+
             //返回sql执行统计行数的结果，耗时856ms
             //MessageBox.Show(db.GetResult(CountSQL).ToString());
             //将数据都存到内存统计行数，耗时996ms
@@ -97,6 +114,61 @@ namespace Pagination
 
         }
 
+        private void txtbox_NowPage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //回车执行查询
+            if (e.KeyChar == 13)
+            {
+                if (IsInt(txtbox_NowPage.Text) == true)
+                {
+                    //一共多少页
+                    if (Convert.ToInt32(txtbox_NowPage.Text) > GetTotalPages(TotalCount, PerPage) || Convert.ToInt32(txtbox_NowPage.Text) < 1)
+                    {
+                        MessageBox.Show("false");
+                    }
+                    else
+                    {
+                        MessageBox.Show("true");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("false");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 判断是否为整型，返回true、false
+        /// </summary>
+        /// <param name="intstring"></param>
+        /// <returns></returns>
+        private bool IsInt(string intstring)
+        {
+            return Regex.IsMatch(intstring, @"[1-9]\d*$");
+        }
+
+        /// <summary>
+        /// 传入总条数、每页显示条数，返回一共多少页
+        /// </summary>
+        /// <param name="TotalCount"></param>
+        /// <param name="RecordsPerPage"></param>
+        /// <returns></returns>
+        public static int GetTotalPages(int TotalCount, int RecordsPerPage)
+        {
+            int TotalPages = 0;
+            int quyu = TotalCount % RecordsPerPage;
+            if (quyu==0)
+            {
+                TotalPages = TotalCount / RecordsPerPage;
+            }
+            else
+            {
+                TotalPages = TotalCount / RecordsPerPage + 1;
+            }
+            return TotalPages;
+        }
+
         /// <summary>
         /// 传入每页条数下拉框的index，获取每页条数
         /// </summary>
@@ -104,7 +176,7 @@ namespace Pagination
         /// <returns></returns>
         public static int GetCmboxRecordsPerPage(int index)
         {
-            int PerPage;
+            int PerPage = 0;
             //1条/页
             if (index==0)
                 PerPage = 1;
@@ -129,8 +201,6 @@ namespace Pagination
             //999条/页
             else if (index ==7)
                 PerPage = 999;
-            else
-                PerPage = 0;
             return PerPage;
         }
 
