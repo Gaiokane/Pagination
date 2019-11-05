@@ -96,6 +96,7 @@
             this.linklab_LastPage.TabIndex = 18;
             this.linklab_LastPage.TabStop = true;
             this.linklab_LastPage.Text = ">>";
+            this.linklab_LastPage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklab_LastPage_LinkClicked);
             // 
             // linklab_NextPage
             // 
@@ -159,6 +160,7 @@
             this.linklab_FirstPage.TabIndex = 12;
             this.linklab_FirstPage.TabStop = true;
             this.linklab_FirstPage.Text = "<<";
+            this.linklab_FirstPage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklab_FirstPage_LinkClicked);
             // 
             // cmbox_RecordsPerPage
             // 

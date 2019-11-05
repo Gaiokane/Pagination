@@ -99,7 +99,7 @@ namespace Pagination
             txtbox_NowPage.TextAlign = HorizontalAlignment.Center;
 
             //分页_每页显示条数下拉框默认选第一个
-            cmbox_RecordsPerPage.SelectedIndex = 0;
+            cmbox_RecordsPerPage.SelectedIndex = 2;
 
             //分页_当前页文本框赋值
             //txtbox_NowPage.Text = 666.ToString();
@@ -111,10 +111,10 @@ namespace Pagination
             //MessageBox.Show(db.GetResult(CountSQL).ToString());
             //将数据都存到内存统计行数，耗时996ms
             //MessageBox.Show(db.GetRows(SourceSQL).ToString());
-            
-            dataGridView1.DataSource = db.GetDataSet(SourceSQL).Tables[0];
 
+            //dataGridView1.DataSource = db.GetDataSet(SourceSQL).Tables[0];
 
+            GetDGV(dataGridView1);
         }
 
         private void txtbox_NowPage_KeyPress(object sender, KeyPressEventArgs e)
@@ -128,33 +128,112 @@ namespace Pagination
                     if (Convert.ToInt32(txtbox_NowPage.Text) > GetTotalPages(TotalCount, PerPage) || Convert.ToInt32(txtbox_NowPage.Text) < 1)
                     {
                         txtbox_NowPage.Text = "1";
+                        #region 此块可直接调用Get DGV（已注释）
+                        /*
                         //获取下拉框每页显示条数
                         PerPage = GetCmboxRecordsPerPage(cmbox_RecordsPerPage.SelectedIndex);
                         //根据每页显示多少条、当前页，拼接SQL
                         LimitSQL = GetLimitSQL(SourceSQL, Convert.ToInt32(txtbox_NowPage.Text) * PerPage - PerPage, PerPage);
                         //datagridview绑定数据
                         dataGridView1.DataSource = db.GetDataSet(LimitSQL).Tables[0];
+                        */
+                        #endregion
+                        GetDGV(dataGridView1);
                     }
                     else
                     {
+                        #region 此块可直接调用Get DGV（已注释）
+                        /*
                         //获取下拉框每页显示条数
                         PerPage = GetCmboxRecordsPerPage(cmbox_RecordsPerPage.SelectedIndex);
                         //根据每页显示多少条、当前页，拼接SQL
                         LimitSQL = GetLimitSQL(SourceSQL, Convert.ToInt32(txtbox_NowPage.Text) * PerPage - PerPage, PerPage);
                         //datagridview绑定数据
                         dataGridView1.DataSource = db.GetDataSet(LimitSQL).Tables[0];
+                        */
+                        #endregion
+                        GetDGV(dataGridView1);
                     }
                 }
                 else
                 {
                     txtbox_NowPage.Text = "1";
+                    #region 此块可直接调用Get DGV（已注释）
+                    /*
                     //获取下拉框每页显示条数
                     PerPage = GetCmboxRecordsPerPage(cmbox_RecordsPerPage.SelectedIndex);
                     //根据每页显示多少条、当前页，拼接SQL
                     LimitSQL = GetLimitSQL(SourceSQL, Convert.ToInt32(txtbox_NowPage.Text) * PerPage - PerPage, PerPage);
                     //datagridview绑定数据
                     dataGridView1.DataSource = db.GetDataSet(LimitSQL).Tables[0];
+                    */
+                    #endregion
+                    GetDGV(dataGridView1);
                 }
+            }
+        }
+
+        private void cmbox_RecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtbox_NowPage.Text = "1";
+            RefreshCountPage(cmbox_RecordsPerPage, lab_TotalRecords, lab_TotalPages);
+            GetDGV(dataGridView1);
+        }
+
+        private void linklab_FirstPage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            txtbox_NowPage.Text = "1";
+            GetDGV(dataGridView1);
+        }
+
+        private void linklab_LastPage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            txtbox_NowPage.Text = GetTotalPages(TotalCount, PerPage).ToString();
+            GetDGV(dataGridView1);
+        }
+
+        /// <summary>
+        /// 传入每页多少条下拉框名称、共几条label每次、共几页label名称，刷新共几条、共几页
+        /// </summary>
+        /// <param name="RecordsPerPage"></param>
+        /// <param name="TotalRecords"></param>
+        /// <param name="TotalPages"></param>
+        public static void RefreshCountPage(ComboBox RecordsPerPage, Label TotalRecords, Label TotalPages)
+        {
+            DB db = new DB();
+
+            //显示共多少条数据
+            int TotalCount = Convert.ToInt32(db.GetResult(CountSQL));
+            TotalRecords.Text = "共" + TotalCount + "条";
+
+            //获取下拉框每页显示条数
+            int PerPage = GetCmboxRecordsPerPage(RecordsPerPage.SelectedIndex);
+
+            //根据总条数、每页显示条数，显示共多少页
+            TotalPages.Text = "共" + GetTotalPages(TotalCount, PerPage) + "页";
+        }
+
+        /// <summary>
+        /// 传入dg名称，根据每页显示多少条、当前页返回分页结果
+        /// </summary>
+        /// <param name="dg"></param>
+        /// <returns></returns>
+        public DataGridView GetDGV(DataGridView dg)
+        {
+            DB db = new DB();
+            try
+            {
+                //获取下拉框每页显示条数
+                PerPage = GetCmboxRecordsPerPage(cmbox_RecordsPerPage.SelectedIndex);
+                //根据每页显示多少条、当前页，拼接SQL
+                LimitSQL = GetLimitSQL(SourceSQL, Convert.ToInt32(txtbox_NowPage.Text) * PerPage - PerPage, PerPage);
+                //datagridview绑定数据
+                dg.DataSource = db.GetDataSet(LimitSQL).Tables[0];
+                return dg;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
@@ -297,11 +376,6 @@ namespace Pagination
                 }
             }
             return ResultStr;
-        }
-
-        private void cmbox_RecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
