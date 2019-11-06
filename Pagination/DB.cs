@@ -12,8 +12,8 @@ namespace Pagination
     {
         public MySqlConnection Mysqlconn()
         {
-            
-            string sqlconn = "Host=127.0.0.1;Database=pagination;Username=qk;Password=11111;sslmode=none";
+
+            string sqlconn = "Host=127.0.0.1;Port=3306;Database=pagination;Username=qk;Password=11111;sslmode=none";
             MySqlConnection conn = new MySqlConnection(sqlconn);
             return conn;
         }

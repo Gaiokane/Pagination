@@ -108,6 +108,7 @@
             this.linklab_NextPage.TabIndex = 17;
             this.linklab_NextPage.TabStop = true;
             this.linklab_NextPage.Text = ">";
+            this.linklab_NextPage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklab_NextPage_LinkClicked);
             // 
             // lab_Ye
             // 
@@ -128,6 +129,7 @@
             this.txtbox_NowPage.TabIndex = 15;
             this.txtbox_NowPage.Text = "1";
             this.txtbox_NowPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbox_NowPage_KeyPress);
+            this.txtbox_NowPage.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtbox_NowPage_KeyUp);
             // 
             // lab_Di
             // 
@@ -149,6 +151,7 @@
             this.linklab_PreviousPage.TabIndex = 13;
             this.linklab_PreviousPage.TabStop = true;
             this.linklab_PreviousPage.Text = "<";
+            this.linklab_PreviousPage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklab_PreviousPage_LinkClicked);
             // 
             // linklab_FirstPage
             // 
@@ -244,7 +247,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
-        private Paginator paginator1;
         private System.Windows.Forms.Label lab_TotalPages;
         private System.Windows.Forms.LinkLabel linklab_LastPage;
         private System.Windows.Forms.LinkLabel linklab_NextPage;
@@ -256,6 +258,7 @@
         private System.Windows.Forms.ComboBox cmbox_RecordsPerPage;
         private System.Windows.Forms.Label lab_TotalRecords;
         private System.Windows.Forms.GroupBox groupBox1;
+        private Paginator paginator1;
     }
 }
 
