@@ -231,6 +231,7 @@ namespace Pagination
             if (recordsPerPage_Items.Length < 1)
             {
                 PerPage = 7;
+                MessageBox.Show("看到这个弹窗，这算是个bug嘛。。。");
             }
             else
             {
@@ -312,8 +313,22 @@ namespace Pagination
 
         private void cmbox_RecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //每页多少条下拉框
-            txtbox_NowPage.Text = defaultNowPage.ToString();
+            //获取下拉框每页显示条数，没有这句条数不对，可以用下面注释掉的弹窗测试
+            PerPage = GetCmboxRecordsPerPage(cmbox_RecordsPerPage.SelectedIndex);
+            /*MessageBox.Show("PerPage:" + PerPage.ToString()
+                + "\ncmbox_Text:" + cmbox_RecordsPerPage.Text
+                + "\ncmbox_SelectedIndex:" + cmbox_RecordsPerPage.SelectedIndex);*/
+
+            if (defaultNowPage > GetTotalPages(TotalCount, PerPage))
+            {
+                txtbox_NowPage.Text = "1";
+            }
+            else
+            {
+                //每页多少条下拉框
+                txtbox_NowPage.Text = defaultNowPage.ToString();
+            }
+
             NowPage = Convert.ToInt32(txtbox_NowPage.Text);
             RefreshCountPage(cmbox_RecordsPerPage, lab_TotalRecords, lab_TotalPages);
             GetDGV(DGVName);
@@ -331,12 +346,23 @@ namespace Pagination
                 //当前页文本框回车
                 if (e.KeyChar == 13)
                 {
+                    PerPage = GetCmboxRecordsPerPage(cmbox_RecordsPerPage.SelectedIndex);
+
                     if (IsInt(txtbox_NowPage.Text) == true)
                     {
                         //一共多少页
                         if (Convert.ToInt32(txtbox_NowPage.Text) > GetTotalPages(TotalCount, PerPage) || Convert.ToInt32(txtbox_NowPage.Text) < 1)
                         {
-                            txtbox_NowPage.Text = defaultNowPage.ToString();
+                            if (defaultNowPage > GetTotalPages(TotalCount, PerPage))
+                            {
+                                txtbox_NowPage.Text = "1";
+                            }
+                            else
+                            {
+                                //每页多少条下拉框
+                                txtbox_NowPage.Text = defaultNowPage.ToString();
+                            }
+
                             NowPage = Convert.ToInt32(txtbox_NowPage.Text);
                             GetDGV(DGVName);
                         }
@@ -348,11 +374,75 @@ namespace Pagination
                     }
                     else
                     {
-                        txtbox_NowPage.Text = defaultNowPage.ToString();
+                        if (defaultNowPage > GetTotalPages(TotalCount, PerPage))
+                        {
+                            txtbox_NowPage.Text = "1";
+                        }
+                        else
+                        {
+                            //每页多少条下拉框
+                            txtbox_NowPage.Text = defaultNowPage.ToString();
+                        }
+
                         NowPage = Convert.ToInt32(txtbox_NowPage.Text);
                         GetDGV(DGVName);
                     }
                 }
+            }
+        }
+
+        private void linklab_FirstPage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //跳到首页按钮
+            txtbox_NowPage.Text = "1";
+            NowPage = Convert.ToInt32(txtbox_NowPage.Text);
+            GetDGV(DGVName);
+        }
+
+        private void linklab_LastPage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //跳到尾页按钮
+            txtbox_NowPage.Text = GetTotalPages(TotalCount, PerPage).ToString();
+            NowPage = Convert.ToInt32(txtbox_NowPage.Text);
+            GetDGV(DGVName);
+        }
+
+        private void linklab_PreviousPage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //上一页按钮
+            if (NowPage > 1)
+            {
+                txtbox_NowPage.Text = (NowPage - 1).ToString();
+                NowPage = NowPage - 1;
+                GetDGV(DGVName);
+            }
+            else
+            {
+                txtbox_NowPage.Text = NowPage.ToString();
+                MessageBox.Show("翻不到前面了😖");
+            }
+        }
+
+        private void linklab_NextPage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //下一页按钮
+
+            //显示共多少条数据
+            int TotalCount = Convert.ToInt32(db.GetResult(CountSQL));
+
+            //获取下拉框每页显示条数
+            int PerPage = GetCmboxRecordsPerPage(cmbox_RecordsPerPage.SelectedIndex);
+
+            if (NowPage < GetTotalPages(TotalCount, PerPage))
+            {
+                txtbox_NowPage.Text = (NowPage + 1).ToString();
+                NowPage = NowPage + 1;
+                GetDGV(DGVName);
+            }
+            else
+            {
+                txtbox_NowPage.Text = NowPage.ToString();
+                MessageBox.Show("翻不到后面了😖");
             }
         }
     }

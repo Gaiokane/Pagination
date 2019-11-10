@@ -79,6 +79,7 @@
             this.linklab_FirstPage.TabIndex = 2;
             this.linklab_FirstPage.TabStop = true;
             this.linklab_FirstPage.Text = "<<";
+            this.linklab_FirstPage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklab_FirstPage_LinkClicked);
             // 
             // linklab_PreviousPage
             // 
@@ -90,6 +91,7 @@
             this.linklab_PreviousPage.TabIndex = 3;
             this.linklab_PreviousPage.TabStop = true;
             this.linklab_PreviousPage.Text = "<";
+            this.linklab_PreviousPage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklab_PreviousPage_LinkClicked);
             // 
             // lab_Di
             // 
@@ -131,6 +133,7 @@
             this.linklab_NextPage.TabIndex = 7;
             this.linklab_NextPage.TabStop = true;
             this.linklab_NextPage.Text = ">";
+            this.linklab_NextPage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklab_NextPage_LinkClicked);
             // 
             // linklab_LastPage
             // 
@@ -142,6 +145,7 @@
             this.linklab_LastPage.TabIndex = 8;
             this.linklab_LastPage.TabStop = true;
             this.linklab_LastPage.Text = ">>";
+            this.linklab_LastPage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklab_LastPage_LinkClicked);
             // 
             // lab_TotalPages
             // 

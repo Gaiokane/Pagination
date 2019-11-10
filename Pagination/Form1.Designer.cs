@@ -231,7 +231,8 @@
             this.paginator1.RecordsPerPage_Items = new string[] {
         "5",
         "10",
-        "15"};
+        "15",
+        "30"};
             this.paginator1.Size = new System.Drawing.Size(400, 27);
             this.paginator1.TabIndex = 3;
             // 
