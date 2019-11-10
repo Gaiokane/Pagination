@@ -300,6 +300,16 @@ namespace Pagination
             return LimitSQL;
         }
 
+        /// <summary>
+        /// 判断是否为整型，返回true、false
+        /// </summary>
+        /// <param name="intstring"></param>
+        /// <returns></returns>
+        private bool IsInt(string intstring)
+        {
+            return Regex.IsMatch(intstring, @"[1-9]\d*$");
+        }
+
         private void cmbox_RecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
         {
             //每页多少条下拉框
@@ -307,6 +317,43 @@ namespace Pagination
             NowPage = Convert.ToInt32(txtbox_NowPage.Text);
             RefreshCountPage(cmbox_RecordsPerPage, lab_TotalRecords, lab_TotalPages);
             GetDGV(DGVName);
+        }
+
+        private void txtbox_NowPage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //如果输入的不是数字键，也不是回车键、Backspace键，则取消该输入
+            if (!(Char.IsNumber(e.KeyChar)) && e.KeyChar != (char)13 && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                //当前页文本框回车
+                if (e.KeyChar == 13)
+                {
+                    if (IsInt(txtbox_NowPage.Text) == true)
+                    {
+                        //一共多少页
+                        if (Convert.ToInt32(txtbox_NowPage.Text) > GetTotalPages(TotalCount, PerPage) || Convert.ToInt32(txtbox_NowPage.Text) < 1)
+                        {
+                            txtbox_NowPage.Text = defaultNowPage.ToString();
+                            NowPage = Convert.ToInt32(txtbox_NowPage.Text);
+                            GetDGV(DGVName);
+                        }
+                        else
+                        {
+                            NowPage = Convert.ToInt32(txtbox_NowPage.Text);
+                            GetDGV(DGVName);
+                        }
+                    }
+                    else
+                    {
+                        txtbox_NowPage.Text = defaultNowPage.ToString();
+                        NowPage = Convert.ToInt32(txtbox_NowPage.Text);
+                        GetDGV(DGVName);
+                    }
+                }
+            }
         }
     }
 }

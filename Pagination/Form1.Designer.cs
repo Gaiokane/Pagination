@@ -42,8 +42,8 @@
             this.cmbox_RecordsPerPage = new System.Windows.Forms.ComboBox();
             this.lab_TotalRecords = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.paginator1 = new Pagination.Paginator();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.paginator1 = new Pagination.Paginator();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -131,7 +131,6 @@
             this.txtbox_NowPage.TabIndex = 15;
             this.txtbox_NowPage.Text = "1";
             this.txtbox_NowPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbox_NowPage_KeyPress);
-            this.txtbox_NowPage.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtbox_NowPage_KeyUp);
             // 
             // lab_Di
             // 
@@ -215,18 +214,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
             // 
-            // paginator1
-            // 
-            this.paginator1.Location = new System.Drawing.Point(388, 12);
-            this.paginator1.Name = "paginator1";
-            this.paginator1.DefaultNowPage = 1;
-            this.paginator1.RecordsPerPage_Items = new string[] {
-        "5",
-        "10",
-        "15"};
-            this.paginator1.Size = new System.Drawing.Size(400, 27);
-            this.paginator1.TabIndex = 3;
-            // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -235,6 +222,18 @@
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.Size = new System.Drawing.Size(400, 338);
             this.dataGridView2.TabIndex = 1;
+            // 
+            // paginator1
+            // 
+            this.paginator1.DefaultNowPage = 2;
+            this.paginator1.Location = new System.Drawing.Point(388, 12);
+            this.paginator1.Name = "paginator1";
+            this.paginator1.RecordsPerPage_Items = new string[] {
+        "5",
+        "10",
+        "15"};
+            this.paginator1.Size = new System.Drawing.Size(400, 27);
+            this.paginator1.TabIndex = 3;
             // 
             // Form1
             // 

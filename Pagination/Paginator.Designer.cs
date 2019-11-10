@@ -109,6 +109,7 @@
             this.txtbox_NowPage.Size = new System.Drawing.Size(37, 21);
             this.txtbox_NowPage.TabIndex = 5;
             this.txtbox_NowPage.Text = "1";
+            this.txtbox_NowPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbox_NowPage_KeyPress);
             // 
             // lab_Ye
             // 

@@ -206,16 +206,6 @@ namespace Pagination
             }
         }
 
-        private void txtbox_NowPage_KeyUp(object sender, KeyEventArgs e)
-        {
-            /*
-            if (txtbox_NowPage.Text != "")
-            {
-                NowPage = Convert.ToInt32(txtbox_NowPage.Text);
-            }
-            */
-        }
-
         private void cmbox_RecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
         {
             //每页多少条下拉框
