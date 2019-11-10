@@ -43,8 +43,10 @@
             this.lab_TotalRecords = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.paginator1 = new Pagination.Paginator();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -63,7 +65,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(12, 41);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(770, 338);
+            this.dataGridView1.Size = new System.Drawing.Size(353, 338);
             this.dataGridView1.TabIndex = 1;
             // 
             // label1
@@ -217,8 +219,22 @@
             // 
             this.paginator1.Location = new System.Drawing.Point(388, 12);
             this.paginator1.Name = "paginator1";
+            this.paginator1.DefaultNowPage = 1;
+            this.paginator1.RecordsPerPage_Items = new string[] {
+        "5",
+        "10",
+        "15"};
             this.paginator1.Size = new System.Drawing.Size(400, 27);
             this.paginator1.TabIndex = 3;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(388, 41);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowTemplate.Height = 23;
+            this.dataGridView2.Size = new System.Drawing.Size(400, 338);
+            this.dataGridView2.TabIndex = 1;
             // 
             // Form1
             // 
@@ -228,6 +244,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.paginator1);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
@@ -237,6 +254,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -259,6 +277,7 @@
         private System.Windows.Forms.Label lab_TotalRecords;
         private System.Windows.Forms.GroupBox groupBox1;
         private Paginator paginator1;
+        private System.Windows.Forms.DataGridView dataGridView2;
     }
 }
 

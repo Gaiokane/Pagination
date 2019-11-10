@@ -20,7 +20,6 @@ namespace Pagination
         }
 
         DB db = new DB();
-        paginator_setting ps = new paginator_setting();
 
         int NowPage;
         int TotalCount;
@@ -107,6 +106,9 @@ namespace Pagination
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            string SourceSQL = "select * from info";
+            paginator1.Run(SourceSQL, dataGridView2);
+            
             //分页_当前页文本框文字居中
             txtbox_NowPage.TextAlign = HorizontalAlignment.Center;
 

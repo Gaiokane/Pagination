@@ -67,6 +67,7 @@
             this.cmbox_RecordsPerPage.Name = "cmbox_RecordsPerPage";
             this.cmbox_RecordsPerPage.Size = new System.Drawing.Size(77, 20);
             this.cmbox_RecordsPerPage.TabIndex = 1;
+            this.cmbox_RecordsPerPage.SelectedIndexChanged += new System.EventHandler(this.cmbox_RecordsPerPage_SelectedIndexChanged);
             // 
             // linklab_FirstPage
             // 
@@ -149,7 +150,7 @@
             this.lab_TotalPages.Name = "lab_TotalPages";
             this.lab_TotalPages.Size = new System.Drawing.Size(47, 12);
             this.lab_TotalPages.TabIndex = 9;
-            this.lab_TotalPages.Text = "共999页";
+            this.lab_TotalPages.Text = "共777页";
             // 
             // Paginator
             // 
