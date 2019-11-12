@@ -225,24 +225,25 @@
             // 
             // paginator1
             // 
-            this.paginator1.DefaultNowPage = 2;
-            this.paginator1.Location = new System.Drawing.Point(388, 12);
+            this.paginator1.DefaultNowPage = 3;
+            this.paginator1.Location = new System.Drawing.Point(392, 8);
             this.paginator1.Name = "paginator1";
             this.paginator1.RecordsPerPage_Items = new string[] {
         "5",
+        "7",
         "10",
         "15",
-        "30"};
-            this.paginator1.Size = new System.Drawing.Size(400, 27);
-            this.paginator1.TabIndex = 3;
+        "20"};
+            this.paginator1.Size = new System.Drawing.Size(396, 27);
+            this.paginator1.TabIndex = 21;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.paginator1);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
@@ -276,8 +277,8 @@
         private System.Windows.Forms.ComboBox cmbox_RecordsPerPage;
         private System.Windows.Forms.Label lab_TotalRecords;
         private System.Windows.Forms.GroupBox groupBox1;
-        private Paginator paginator1;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private Paginator paginator1;
     }
 }
 

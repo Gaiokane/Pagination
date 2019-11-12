@@ -95,6 +95,12 @@ namespace Pagination
         /// <param name="sqlconn"></param>
         public void Run(string SQLQuery, DataGridView dgv, string sqlconn)
         {
+            if (recordsPerPage_Items.Length < 1)
+            {
+                MessageBox.Show("请在分页控件属性中配置RecordsPerPage_Items");
+                Application.Exit();
+            }
+
             db.SqlConn = sqlconn;
 
             SourceSQL = SQLQuery;
@@ -137,7 +143,7 @@ namespace Pagination
             GetDGV(dgv);
         }
 
-        public void runtest()
+        private void runtest()
         {
             if (recordsPerPage_Items.Length > 0)
             {
