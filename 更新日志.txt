@@ -1,3 +1,11 @@
+2019年11月12日
+1.Paginator.Run增加mysql连接参数
+PaginatorRun(string SQLQuery, DataGridView dgv, string sqlconn)传入SQL语句、datagridview名字、mysql连接语句
+例如：
+string SourceSQL = "select * from info";
+string mysqlconn = "Host=127.0.0.1;Port=3306;Database=pagination;Username=qk;Password=11111;sslmode=none";
+PaginatorRun(SourceSQL, dataGridView2, mysqlconn)
+
 2019年11月10日
 1.用户控件在属性中配置默认页码、下拉框值；按配置刷新dg、下拉框选项切换刷新dg完成
 2.当前页文本框回车事件完成

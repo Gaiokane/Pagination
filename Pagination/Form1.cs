@@ -26,6 +26,8 @@ namespace Pagination
         int PerPage;
         string LimitSQL;
 
+        string mysqlconn = "Host=127.0.0.1;Port=3306;Database=pagination;Username=qk;Password=11111;sslmode=none";
+
         //原始SQL
         static string SourceSQL = "SELECT id,xxx FROM info";
 
@@ -106,8 +108,11 @@ namespace Pagination
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            db.SqlConn = mysqlconn;
+
             string SourceSQL = "select * from info";
-            paginator1.Run(SourceSQL, dataGridView2);
+
+            paginator1.Run(SourceSQL, dataGridView2, mysqlconn);
             
             //分页_当前页文本框文字居中
             txtbox_NowPage.TextAlign = HorizontalAlignment.Center;
@@ -278,10 +283,8 @@ namespace Pagination
         /// <param name="RecordsPerPage"></param>
         /// <param name="TotalRecords"></param>
         /// <param name="TotalPages"></param>
-        public static void RefreshCountPage(ComboBox RecordsPerPage, Label TotalRecords, Label TotalPages)
+        public void RefreshCountPage(ComboBox RecordsPerPage, Label TotalRecords, Label TotalPages)
         {
-            DB db = new DB();
-
             //显示共多少条数据
             int TotalCount = Convert.ToInt32(db.GetResult(CountSQL));
             TotalRecords.Text = "共" + TotalCount + "条";
@@ -300,7 +303,6 @@ namespace Pagination
         /// <returns></returns>
         public DataGridView GetDGV(DataGridView dg)
         {
-            DB db = new DB();
             try
             {
                 //获取下拉框每页显示条数

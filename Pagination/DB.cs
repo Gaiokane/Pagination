@@ -10,11 +10,12 @@ namespace Pagination
 {
     class DB
     {
+        private string sqlConn;//sql连接
+
         public MySqlConnection Mysqlconn()
         {
-
-            string sqlconn = "Host=127.0.0.1;Port=3306;Database=pagination;Username=qk;Password=11111;sslmode=none";
-            MySqlConnection conn = new MySqlConnection(sqlconn);
+            //string sqlconn = "Host=127.0.0.1;Port=3306;Database=pagination;Username=qk;Password=11111;sslmode=none";
+            MySqlConnection conn = new MySqlConnection(sqlConn);
             return conn;
         }
 
@@ -23,6 +24,12 @@ namespace Pagination
         //MysqlComm
         //MysqlDs
         //没有Comm
+
+        public string SqlConn
+        {
+            get { return sqlConn; }
+            set { sqlConn = value; }
+        }
 
         /// <summary>
         /// 传入SQL，返回查询结果记录条数

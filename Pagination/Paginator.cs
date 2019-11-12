@@ -87,8 +87,16 @@ namespace Pagination
             //cmbox_RecordsPerPage.SelectedIndex = 0;
         }
 
-        public void Run(string SQLQuery, DataGridView dgv)
+        /// <summary>
+        /// 传入SQL语句、datagridview名字、mysql连接语句
+        /// </summary>
+        /// <param name="SQLQuery"></param>
+        /// <param name="dgv"></param>
+        /// <param name="sqlconn"></param>
+        public void Run(string SQLQuery, DataGridView dgv, string sqlconn)
         {
+            db.SqlConn = sqlconn;
+
             SourceSQL = SQLQuery;
 
             //将dgv存到变量，供其他功能调用
