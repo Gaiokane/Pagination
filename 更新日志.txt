@@ -1,3 +1,7 @@
+2019年11月13日
+1.单独建类库放分页用户控件（原项目改名Pagination->PaginationWinForm,卸载，移除，新建项目Pagination）
+2.recordsPerPage_Items设置默认值
+
 2019年11月12日
 1.paginator.Run增加自定义mysql连接参数
 2.在新项目中测试使用，修改分页控件属性RecordsPerPage_Items为必填项

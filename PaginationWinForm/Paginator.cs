@@ -41,8 +41,7 @@ namespace Pagination
         DB db = new DB();
 
         #region 属性窗口元件
-        //private string[] recordsPerPage_Items = null;//每页显示条数数组
-        private string[] recordsPerPage_Items = new string[] { "3", "5", "7" };//每页显示条数数组
+        private string[] recordsPerPage_Items = null;//每页显示条数数组
         private int defaultNowPage;//当前页
         private string sourceSQL;//原始SQL
 
@@ -96,17 +95,11 @@ namespace Pagination
         /// <param name="sqlconn"></param>
         public void Run(string SQLQuery, DataGridView dgv, string sqlconn)
         {
-            //MessageBox.Show("这里是Run");
-
-            #region 加了这块程序就不会往下走了 有点奇怪
-            /*
-                if (recordsPerPage_Items.Length < 1)
-                {
-                    MessageBox.Show("请在分页控件属性中配置RecordsPerPage_Items");
-                    Application.Exit();
-                }
-                */
-            #endregion
+            if (recordsPerPage_Items.Length < 1)
+            {
+                MessageBox.Show("请在分页控件属性中配置RecordsPerPage_Items");
+                Application.Exit();
+            }
 
             db.SqlConn = sqlconn;
 
@@ -152,7 +145,6 @@ namespace Pagination
 
         private void runtest()
         {
-            /*
             if (recordsPerPage_Items.Length > 0)
             {
                 cmbox_RecordsPerPage.Items.Clear();
@@ -162,8 +154,7 @@ namespace Pagination
                     cmbox_RecordsPerPage.Items.Add(translateRecordsPerPage);
                 }
                 cmbox_RecordsPerPage.SelectedIndex = 0;
-            }*/
-            MessageBox.Show("这里是Runtest");
+            }
         }
 
         /// <summary>
@@ -254,8 +245,7 @@ namespace Pagination
             if (recordsPerPage_Items.Length < 1)
             {
                 PerPage = 7;
-                //MessageBox.Show("看到这个弹窗，这算是个bug嘛。。。");
-                MessageBox.Show("喂喂喂！要给分页控件属性中的RecordsPerPage_Items配置值！");
+                MessageBox.Show("看到这个弹窗，这算是个bug嘛。。。");
             }
             else
             {
