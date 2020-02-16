@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace Pagination
 {
-    class DB
+    class DBWinForm
     {
         private string sqlConn;//sql连接
 

@@ -225,15 +225,13 @@
             // 
             // paginator1
             // 
-            this.paginator1.DefaultNowPage = 3;
-            this.paginator1.Location = new System.Drawing.Point(392, 8);
+            this.paginator1.DefaultNowPage = 1;
+            this.paginator1.Location = new System.Drawing.Point(388, 8);
             this.paginator1.Name = "paginator1";
             this.paginator1.RecordsPerPage_Items = new string[] {
+        "3",
         "5",
-        "7",
-        "10",
-        "15",
-        "20"};
+        "7"};
             this.paginator1.Size = new System.Drawing.Size(396, 27);
             this.paginator1.TabIndex = 21;
             // 

@@ -11,9 +11,9 @@ using System.Text.RegularExpressions;
 
 namespace Pagination
 {
-    public partial class Paginator : UserControl
+    public partial class PaginatorWinForm : UserControl
     {
-        public Paginator()
+        public PaginatorWinForm()
         {
             InitializeComponent();
         }
@@ -41,7 +41,8 @@ namespace Pagination
         DB db = new DB();
 
         #region 属性窗口元件
-        private string[] recordsPerPage_Items = null;//每页显示条数数组
+        //private string[] recordsPerPage_Items = null;//每页显示条数数组
+        private string[] recordsPerPage_Items = new string[] { "3", "5", "7" };//每页显示条数数组
         private int defaultNowPage;//当前页
         private string sourceSQL;//原始SQL
 
@@ -95,11 +96,17 @@ namespace Pagination
         /// <param name="sqlconn"></param>
         public void Run(string SQLQuery, DataGridView dgv, string sqlconn)
         {
-            if (recordsPerPage_Items.Length < 1)
-            {
-                MessageBox.Show("请在分页控件属性中配置RecordsPerPage_Items");
-                Application.Exit();
-            }
+            //MessageBox.Show("这里是Run");
+
+            #region 加了这块程序就不会往下走了 有点奇怪
+            /*
+                if (recordsPerPage_Items.Length < 1)
+                {
+                    MessageBox.Show("请在分页控件属性中配置RecordsPerPage_Items");
+                    Application.Exit();
+                }
+                */
+            #endregion
 
             db.SqlConn = sqlconn;
 
@@ -145,6 +152,7 @@ namespace Pagination
 
         private void runtest()
         {
+            /*
             if (recordsPerPage_Items.Length > 0)
             {
                 cmbox_RecordsPerPage.Items.Clear();
@@ -154,7 +162,8 @@ namespace Pagination
                     cmbox_RecordsPerPage.Items.Add(translateRecordsPerPage);
                 }
                 cmbox_RecordsPerPage.SelectedIndex = 0;
-            }
+            }*/
+            MessageBox.Show("这里是Runtest");
         }
 
         /// <summary>
@@ -245,7 +254,8 @@ namespace Pagination
             if (recordsPerPage_Items.Length < 1)
             {
                 PerPage = 7;
-                MessageBox.Show("看到这个弹窗，这算是个bug嘛。。。");
+                //MessageBox.Show("看到这个弹窗，这算是个bug嘛。。。");
+                MessageBox.Show("喂喂喂！要给分页控件属性中的RecordsPerPage_Items配置值！");
             }
             else
             {
@@ -288,8 +298,31 @@ namespace Pagination
                 PerPage = GetCmboxRecordsPerPage(cmbox_RecordsPerPage.SelectedIndex);
                 //根据每页显示多少条、当前页，拼接SQL
                 LimitSQL = GetLimitSQL(SourceSQL, Convert.ToInt32(txtbox_NowPage.Text) * PerPage - PerPage, PerPage);
+
+                DataSet ds = db.GetDataSet(LimitSQL);
+                ds.Tables[0].Columns.Add("序号", typeof(int));
+                ds.Tables[0].Columns["序号"].SetOrdinal(0);
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    /*
+                     * 每页显示5条
+                     * 当前第1页
+                     * 每页显示条数*（当前第几页-1）+i+1（i=0）
+                     * 5*（1-1）+1=1
+                     * 
+                     * 当前第2页
+                     * 序号
+                     * 5*（2-1）+1=6
+                     * 
+                     * 当前第3页
+                     * 序号
+                     * 5*（3-1）+1=11
+                     */
+                    ds.Tables[0].Rows[i]["序号"] = PerPage * (NowPage - 1) + i + 1;
+                }
+
                 //datagridview绑定数据
-                dg.DataSource = db.GetDataSet(LimitSQL).Tables[0];
+                dg.DataSource = ds.Tables[0];
                 return dg;
             }
             catch (Exception ex)

@@ -298,8 +298,31 @@ namespace Pagination
                 PerPage = GetCmboxRecordsPerPage(cmbox_RecordsPerPage.SelectedIndex);
                 //根据每页显示多少条、当前页，拼接SQL
                 LimitSQL = GetLimitSQL(SourceSQL, Convert.ToInt32(txtbox_NowPage.Text) * PerPage - PerPage, PerPage);
+
+                DataSet ds = db.GetDataSet(LimitSQL);
+                ds.Tables[0].Columns.Add("序号", typeof(int));
+                ds.Tables[0].Columns["序号"].SetOrdinal(0);
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    /*
+                     * 每页显示5条
+                     * 当前第1页
+                     * 每页显示条数*（当前第几页-1）+i+1（i=0）
+                     * 5*（1-1）+1=1
+                     * 
+                     * 当前第2页
+                     * 序号
+                     * 5*（2-1）+1=6
+                     * 
+                     * 当前第3页
+                     * 序号
+                     * 5*（3-1）+1=11
+                     */
+                    ds.Tables[0].Rows[i]["序号"] = PerPage * (NowPage - 1) + i + 1;
+                }
+
                 //datagridview绑定数据
-                dg.DataSource = db.GetDataSet(LimitSQL).Tables[0];
+                dg.DataSource = ds.Tables[0];
                 return dg;
             }
             catch (Exception ex)

@@ -1,6 +1,6 @@
 ﻿namespace Pagination
 {
-    partial class Paginator
+    partial class PaginatorWinForm
     {
         /// <summary> 
         /// 必需的设计器变量。
